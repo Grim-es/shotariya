@@ -109,7 +109,7 @@ class PMXArmToolPpanel(bpy.types.Panel):
                 layout.operator('pmxarm_tool.fix_my_hips', icon = 'ERROR', 
                                 text = 'Select Armature')
         else:
-            layout.label(text = 'Open the model first')
+            layout.label(text = 'Open model first')
 
 
 def register():
