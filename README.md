@@ -2,6 +2,9 @@
  File > User Preferences > Add-ons > 
      Install Add-on from File.. > Select pmxarm_tool.py
      Save User Settings
+# How to use:
+ 1) Select armature
+ 2) 
 
 # Author:
  shotariya
