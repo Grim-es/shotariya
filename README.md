@@ -2,7 +2,7 @@ pmxarm_tool
 ===========
 Overview
 ----
-pmxarm_tool is a blender addon for reparenting and deleting MMD (MikuMikuDance) model armature data for using in Unity.
+pmxarm_tool is a blender addon for reparenting and deleting MMD (MikuMikuDance) model armature bones data for using in Unity.
 
 ### Environment
 
