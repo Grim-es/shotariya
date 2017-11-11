@@ -107,16 +107,17 @@ class PMXArmToolPpanel(bpy.types.Panel):
         layout = self.layout
         layout.label(text = 'PMX Armature:')
         armature = context.active_object
-        if armature.type == 'ARMATURE':
-            layout.operator('pmxarm_tool.fix_an_armature', icon = 'POSE_HLT', 
-                            text = 'Press to Fix')
-            layout.operator('pmxarm_tool.fix_my_hips', icon = 'BONE_DATA', 
-                            text = 'Fix Hips')
-        else:
-            layout.operator('pmxarm_tool.fix_an_armature', icon = 'ERROR', 
-                            text = 'Select Armature')
-            layout.operator('pmxarm_tool.fix_my_hips', icon = 'ERROR', 
-                            text = 'Select Armature')
+        if armature is not None:
+            if armature.type == 'ARMATURE':
+                layout.operator('pmxarm_tool.fix_an_armature', icon = 'POSE_HLT', 
+                                text = 'Press to Fix')
+                layout.operator('pmxarm_tool.fix_my_hips', icon = 'BONE_DATA', 
+                                text = 'Fix Hips')
+            else:
+                layout.operator('pmxarm_tool.fix_an_armature', icon = 'ERROR', 
+                                text = 'Select Armature')
+                layout.operator('pmxarm_tool.fix_my_hips', icon = 'ERROR', 
+                                text = 'Select Armature')
 
 
 def register():
