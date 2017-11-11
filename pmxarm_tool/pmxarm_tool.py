@@ -7,7 +7,7 @@
 #
 #
 # Author: shotariya
-# Downloaded from: https://pastebin.com/raw/uSGRv1uv
+# Downloaded from: https://github.com/Grim-es/shotariya
 
 
 bl_info = {
