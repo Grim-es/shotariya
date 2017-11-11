@@ -25,7 +25,7 @@ Extract the archive and put the file pmxarm_tool.py into the addon folder of ble
 1. User Preferences -> addon tab -> select the User filter and click the checkbox before pmxarm_tool (you can also find the addon using the search function)
 2. After the installation, you can find a panel called pmxarm_tool on the left of the 3D view
 
-### Fixing an armature
+### Fixing the armature
 1. Select the armature
 2. Go to the pmxarm_tool panel
 3. Press "Press to Fix" button
