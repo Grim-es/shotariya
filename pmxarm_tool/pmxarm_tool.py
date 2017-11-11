@@ -1,14 +1,4 @@
-# Save as: pmxarm_tool.py
-#
-# How to instal:
-# File > User Preferences > Add-ons > 
-#     Install Add-on from File.. > Select this file
-#     Save User Settings
-#
-#
-# Author: shotariya
-# Downloaded from: https://github.com/Grim-es/shotariya
-
+# -*- coding: utf-8 -*-
 
 bl_info = {
     "name": "pmxarm_tool",
