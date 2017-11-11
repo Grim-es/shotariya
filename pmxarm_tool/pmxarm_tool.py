@@ -30,7 +30,7 @@ def main(self, context):
                  'LegIKParent_L', 'LowerBody2', 'Eyes']
     bone_list_with = ['_shadow_', '_dummy_', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
                       'ToeTipIKTip', 'WaistCancel', 'Dummy_']
-    bone_list_parenting = {'LowerBody22': 'UpperBody', 'UpperBody2': 'Shoulder_L',
+    bone_list_parenting = {'LowerBody': 'UpperBody', 'UpperBody2': 'Shoulder_L',
                            'UpperBody2': 'Shoulder_R', 'Shoulder_L': 'Arm_L', 'Shoulder_R': 'Arm_R',
                            'Arm_L': 'Elbow_L', 'Arm_R': 'Elbow_R', 'Elbow_L': 'Wrist_L',
                            'Elbow_R': 'Wrist_R', 'Leg_L': 'LegD_L', 'Knee_L': 'KneeD_L',
