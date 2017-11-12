@@ -100,7 +100,7 @@ class PMXArmToolPpanel(bpy.types.Panel):
             layout.label(text = 'PMX Armature:')
             if armature.type == 'ARMATURE':
                 layout.operator('pmxarm_tool.fix_an_armature', icon = 'POSE_HLT', 
-                                text = 'Press to Fix')
+                                text = 'Fix Armature')
                 layout.operator('pmxarm_tool.fix_my_hips', icon = 'BONE_DATA', 
                                 text = 'Fix Hips')
             else:
