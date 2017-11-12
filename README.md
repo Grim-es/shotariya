@@ -28,7 +28,7 @@ Extract the archive and put the file pmxarm_tool.py into the addon folder of ble
 ### Fixing the armature
 1. Select the armature
 2. Go to the pmxarm_tool panel
-3. Press "Press to Fix" button
+3. Press "Fix Armature" button
 
 License
 ----------
