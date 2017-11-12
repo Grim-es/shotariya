@@ -114,14 +114,14 @@ class PMXArmToolPpanel(bpy.types.Panel):
 
 def register():
     bpy.utils.register_class(FixPMXArmature)
-    bpy.utils.register_class(PMXArmToolPpanel)
     bpy.utils.register_class(FixPMXHips)
+    bpy.utils.register_class(PMXArmToolPpanel)
 
 
 def unregister():
     bpy.utils.unregister_class(FixPMXArmature)
-    bpy.utils.unregister_class(PMXArmToolPpanel)
     bpy.utils.unregister_class(FixPMXHips)
+    bpy.utils.unregister_class(PMXArmToolPpanel)
 
 
 if __name__ == "__main__":
