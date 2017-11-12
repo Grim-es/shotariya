@@ -19,7 +19,7 @@ def main(self, context):
     bone_list = ['ControlNode', 'ParentNode', 'Center', 'CenterTip', 'Groove', 'Waist',
                  'LegIKParent_L', 'LowerBody2', 'Eyes']
     bone_list_with = ['_shadow_', '_dummy_', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
-                      'ToeTipIKTip', 'WaistCancel', 'Dummy_']
+                      'ToeTipIKTip', 'WaistCancel', 'Dummy_', 'ShoulderP_']
     bone_list_parenting = {'LowerBody': 'UpperBody', 'UpperBody2': 'Shoulder_L',
                            'UpperBody2': 'Shoulder_R', 'Shoulder_L': 'Arm_L', 'Shoulder_R': 'Arm_R',
                            'Arm_L': 'Elbow_L', 'Arm_R': 'Elbow_R', 'Elbow_L': 'Wrist_L',
