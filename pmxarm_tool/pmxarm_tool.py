@@ -64,14 +64,14 @@ def main(self, context):
     armature = bpy.context.object
     if armature is not None:
         if armature.type == 'ARMATURE':
-            armature_data = armature.data
+            continue
         else:
             self.report({'ERROR'}, 'Select Armature')
             return {'CANCELLED'}
     bpy.ops.object.mode_set(mode='EDIT')
-    for bone in armature_data.edit_bones:
+    for bone in armature.data.edit_bones:
         if bone.name in bone_list or bone.name.startswith(tuple(bone_list_with)):
-            armature_data.edit_bones.remove(bone)
+            armature.data.edit_bones.remove(bone)
     for key, value in bone_list_parenting.items():
         pb = armature.pose.bones.get(key)
         pb2 = armature.pose.bones.get(value)
@@ -79,14 +79,14 @@ def main(self, context):
             continue
         if pb2 is None:
             continue
-        armature_data.edit_bones[value].parent = armature.data.edit_bones[key]
+        armature.data.edit_bones[value].parent = armature.data.edit_bones[key]
     for key, value in bone_list_translate.items():
         pb = armature.pose.bones.get(key)
         if pb is None:
             continue
         pb.name = value
     bpy.ops.object.mode_set(mode='OBJECT')
-    armature_data.pose_position = 'REST'
+    armature.data.pose_position = 'REST'
 
 
 class FixPMXArmature(bpy.types.Operator):
