@@ -63,9 +63,7 @@ def main(self, context):
 
     armature = bpy.context.object
     if armature is not None:
-        if armature.type == 'ARMATURE':
-            continue
-        else:
+        if armature.type != 'ARMATURE':
             self.report({'ERROR'}, 'Select Armature')
             return {'CANCELLED'}
     bpy.ops.object.mode_set(mode='EDIT')
