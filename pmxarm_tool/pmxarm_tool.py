@@ -3,7 +3,7 @@
 bl_info = {
     "name": "pmxarm_tool",
     "author": "shotariya desu",
-    "version": (0, 0, 6),
+    "version": (0, 0, 7),
     "blender": (2, 79, 0),
     "description": "Fix an armature of MMD models for Unity",
     "location": "Space Menu",
@@ -17,7 +17,7 @@ import bpy
 
 def main(self, context):
     bone_list = ['ControlNode', 'ParentNode', 'Center', 'CenterTip', 'Groove', 'Waist',
-                 'LegIKParent_L', 'LowerBody2', 'Eyes']
+                 'LowerBody2', 'Eyes', 'EyesTip']
     bone_list_with = ['_shadow_', '_dummy_', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
                       'ToeTipIKTip', 'WaistCancel', 'Dummy_', 'ShoulderP_']
     bone_list_parenting = {
@@ -31,33 +31,33 @@ def main(self, context):
         'Elbow_L': 'Wrist_L',
         'Elbow_R': 'Wrist_R',
         'Leg_L': 'LegD_L',
-        'Knee_L': 'KneeD_L',
-        'Ankle_L': 'AnkleD_L',
-        'ToeTip_L': 'LegTipEX_L',
         'Leg_R': 'LegD_R',
+        'Knee_L': 'KneeD_L',
         'Knee_R': 'KneeD_R',
+        'Ankle_L': 'AnkleD_L',
         'Ankle_R': 'AnkleD_R',
+        'ToeTip_L': 'LegTipEX_L',
         'ToeTip_R': 'LegTipEX_R'
     }
     bone_list_translate = {
         'LowerBody': 'Hips',
         'Leg_L': 'Left leg',
-        'Knee_L': 'Left knee',
-        'Ankle_L': 'Left ankle',
-        'ToeTip_L': 'Left toe',
         'Leg_R': 'Right leg',
+        'Knee_L': 'Left knee',
         'Knee_R': 'Right knee',
+        'Ankle_L': 'Left ankle',
         'Ankle_R': 'Right ankle',
+        'ToeTip_L': 'Left toe',
         'ToeTip_R': 'Right toe',
         'UpperBody': 'Spine',
         'UpperBody2': 'Chest',
         'Shoulder_L': 'Left shoulder',
-        'Arm_L': 'Left arm',
-        'Elbow_L': 'Left elbow',
-        'Wrist_L': 'Left wrist',
         'Shoulder_R': 'Right shoulder',
+        'Arm_L': 'Left arm',
         'Arm_R': 'Right arm',
+        'Elbow_L': 'Left elbow',
         'Elbow_R': 'Right elbow',
+        'Wrist_L': 'Left wrist',
         'Wrist_R': 'Right wrist'
 }
 
