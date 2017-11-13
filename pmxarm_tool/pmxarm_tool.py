@@ -17,25 +17,26 @@ import bpy
 
 def main(self, context):
     bone_list = ['ControlNode', 'ParentNode', 'Center', 'CenterTip', 'Groove', 'Waist', 'LowerBody2', 'Eyes', 'EyesTip']
-    bone_list_with = ['_shadow_', '_dummy_', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK', 'ToeTipIKTip',
-                      'WaistCancel', 'Dummy_', 'ShoulderP_']
+    bone_list_with = ['_shadow_', '_dummy_', 'Dummy_', 'WaistCancel', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
+                      'ToeTipIKTip', 'ShoulderP_']
     bone_list_parenting = {
-        'LowerBody': ['UpperBody'],
-        'UpperBody2': ['Shoulder_L', 'Shoulder_R'],
-        'Shoulder_L': ['Arm_L'],
-        'Shoulder_R': ['Arm_R'],
-        'Arm_L': ['Elbow_L'],
-        'Arm_R': ['Elbow_R'],
-        'Elbow_L': ['Wrist_L'],
-        'Elbow_R': ['Wrist_R'],
-        'Leg_L': ['LegD_L'],
-        'Leg_R': ['LegD_R'],
-        'Knee_L': ['KneeD_L'],
-        'Knee_R': ['KneeD_R'],
-        'Ankle_L': ['AnkleD_L'],
-        'Ankle_R': ['AnkleD_R'],
-        'ToeTip_L': ['LegTipEX_L'],
-        'ToeTip_R': ['LegTipEX_R']
+        'UpperBody': 'LowerBody',
+        'Shoulder_L': 'UpperBody2',
+        'Shoulder_R': 'UpperBody2',
+        'Arm_L': 'Shoulder_L',
+        'Arm_R': 'Shoulder_R',
+        'Elbow_L': 'Arm_L',
+        'Elbow_R': 'Arm_R',
+        'Wrist_L': 'Elbow_L',
+        'Wrist_R': 'Elbow_R',
+        'LegD_L': 'Leg_L',
+        'LegD_R': 'Leg_R',
+        'KneeD_L': 'Knee_L',
+        'KneeD_R': 'Knee_R',
+        'AnkleD_L': 'Ankle_L',
+        'AnkleD_R': 'Ankle_R',
+        'LegTipEX_L': 'ToeTip_L',
+        'LegTipEX_R': 'ToeTip_R'
     }
     bone_list_translate = {
         'LowerBody': 'Hips',
@@ -69,12 +70,11 @@ def main(self, context):
         if bone.name in bone_list or bone.name.startswith(tuple(bone_list_with)):
             armature.data.edit_bones.remove(bone)
     for key, value in bone_list_parenting.items():
-        for vval in value:
-            pb = armature.pose.bones.get(key)
-            pb2 = armature.pose.bones.get(vval)
-            if pb is None or pb2 is None:
-                continue
-            armature.data.edit_bones[vval].parent = armature.data.edit_bones[key]
+        pb = armature.pose.bones.get(key)
+        pb2 = armature.pose.bones.get(value)
+        if pb is None or pb2 is None:
+            continue
+        armature.data.edit_bones[key].parent = armature.data.edit_bones[value]
     for key, value in bone_list_translate.items():
         pb = armature.pose.bones.get(key)
         if pb is None:
