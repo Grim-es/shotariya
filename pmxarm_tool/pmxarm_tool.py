@@ -20,20 +20,46 @@ def main(self, context):
                  'LegIKParent_L', 'LowerBody2', 'Eyes']
     bone_list_with = ['_shadow_', '_dummy_', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
                       'ToeTipIKTip', 'WaistCancel', 'Dummy_', 'ShoulderP_']
-    bone_list_parenting = {'LowerBody': 'UpperBody', 'UpperBody2': 'Shoulder_L',
-                           'UpperBody2': 'Shoulder_R', 'Shoulder_L': 'Arm_L', 'Shoulder_R': 'Arm_R',
-                           'Arm_L': 'Elbow_L', 'Arm_R': 'Elbow_R', 'Elbow_L': 'Wrist_L',
-                           'Elbow_R': 'Wrist_R', 'Leg_L': 'LegD_L', 'Knee_L': 'KneeD_L',
-                           'Ankle_L': 'AnkleD_L', 'ToeTip_L': 'LegTipEX_L', 'Leg_R': 'LegD_R',
-                           'Knee_R': 'KneeD_R', 'Ankle_R': 'AnkleD_R', 'ToeTip_R': 'LegTipEX_R'}
-    bone_list_translate = {'LowerBody': 'Hips', 'Leg_L': 'Left leg', 'Knee_L': 'Left knee',
-                           'Ankle_L': 'Left ankle', 'ToeTip_L': 'Left toe', 'Leg_R': 'Right leg',
-                           'Knee_R': 'Right knee', 'Ankle_R': 'Right ankle', 'ToeTip_R': 'Right toe',
-                           'UpperBody': 'Spine', 'UpperBody2': 'Chest',
-                           'Shoulder_L': 'Left shoulder', 'Arm_L': 'Left arm',
-                           'Elbow_L': 'Left elbow', 'Wrist_L': 'Left wrist',
-                           'Shoulder_R': 'Right shoulder', 'Arm_R': 'Right arm',
-                           'Elbow_R': 'Right elbow', 'Wrist_R': 'Right wrist'}
+    bone_list_parenting = {
+        'LowerBody': 'UpperBody',
+        'UpperBody2': 'Shoulder_L',
+        'UpperBody2': 'Shoulder_R',
+        'Shoulder_L': 'Arm_L',
+        'Shoulder_R': 'Arm_R',
+        'Arm_L': 'Elbow_L',
+        'Arm_R': 'Elbow_R',
+        'Elbow_L': 'Wrist_L',
+        'Elbow_R': 'Wrist_R',
+        'Leg_L': 'LegD_L',
+        'Knee_L': 'KneeD_L',
+        'Ankle_L': 'AnkleD_L',
+        'ToeTip_L': 'LegTipEX_L',
+        'Leg_R': 'LegD_R',
+        'Knee_R': 'KneeD_R',
+        'Ankle_R': 'AnkleD_R',
+        'ToeTip_R': 'LegTipEX_R'
+    }
+    bone_list_translate = {
+        'LowerBody': 'Hips',
+        'Leg_L': 'Left leg',
+        'Knee_L': 'Left knee',
+        'Ankle_L': 'Left ankle',
+        'ToeTip_L': 'Left toe',
+        'Leg_R': 'Right leg',
+        'Knee_R': 'Right knee',
+        'Ankle_R': 'Right ankle',
+        'ToeTip_R': 'Right toe',
+        'UpperBody': 'Spine',
+        'UpperBody2': 'Chest',
+        'Shoulder_L': 'Left shoulder',
+        'Arm_L': 'Left arm',
+        'Elbow_L': 'Left elbow',
+        'Wrist_L': 'Left wrist',
+        'Shoulder_R': 'Right shoulder',
+        'Arm_R': 'Right arm',
+        'Elbow_R': 'Right elbow',
+        'Wrist_R': 'Right wrist'
+}
 
     armature = bpy.context.object
     if armature is not None:
