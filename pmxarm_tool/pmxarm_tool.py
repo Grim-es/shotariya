@@ -16,9 +16,10 @@ import bpy
 
 
 def main(self, context):
-    bone_list = ['ControlNode', 'ParentNode', 'Center', 'CenterTip', 'Groove', 'Waist', 'LowerBody2', 'Eyes', 'EyesTip']
+    bone_list = ['ControlNode', 'ParentNode', 'Center', 'CenterTip', 'Groove', 'Waist', 'LowerBody2', 'Eyes', 'EyesTip',
+                 'LowerBodyTip', 'UpperBody2Tip', 'GrooveTip', 'NeckTip']
     bone_list_with = ['_shadow_', '_dummy_', 'Dummy_', 'WaistCancel', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
-                      'ToeTipIKTip', 'ShoulderP_']
+                      'ToeTipIKTip', 'ShoulderP_', 'EyeTip_']
     bone_list_parenting = {
         'UpperBody': 'LowerBody',
         'Shoulder_L': 'UpperBody2',
@@ -100,7 +101,7 @@ class FixPMXArmature(bpy.types.Operator):
 
 class FixPMXHips(bpy.types.Operator):
     bl_idname = "pmxarm_tool.fix_my_hips"
-    bl_label = "Fix my hips"
+    bl_label = "Fix an armature"
 
     def execute(self, context):
         self.report({'INFO'}, 'This feature has not yet been scripted.')
