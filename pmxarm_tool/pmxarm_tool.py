@@ -61,26 +61,38 @@ def main(self, context):
         'Wrist_R': 'Right wrist'
 }
 
-    armature = bpy.context.object
+    for obj in bpy.data.objects:
+        obj.select = False
+        if obj.type == 'ARMATURE':
+            bpy.context.scene.objects.active = obj
+            obj.select = True
+
+    armature = bpy.context.scene.objects.active
+    
     if armature is not None:
         if armature.type != 'ARMATURE':
             self.report({'ERROR'}, 'Select Armature')
             return {'CANCELLED'}
+
     bpy.ops.object.mode_set(mode='EDIT')
+
     for bone in armature.data.edit_bones:
         if bone.name in bone_list or bone.name.startswith(tuple(bone_list_with)):
             armature.data.edit_bones.remove(bone)
+
     for key, value in bone_list_parenting.items():
         pb = armature.pose.bones.get(key)
         pb2 = armature.pose.bones.get(value)
         if pb is None or pb2 is None:
             continue
         armature.data.edit_bones[key].parent = armature.data.edit_bones[value]
+
     for key, value in bone_list_translate.items():
         pb = armature.pose.bones.get(key)
         if pb is None:
             continue
         pb.name = value
+
     bpy.ops.object.mode_set(mode='OBJECT')
     armature.data.pose_position = 'REST'
 
@@ -120,16 +132,10 @@ class PMXArmToolPpanel(bpy.types.Panel):
         armature = context.active_object
         if armature is not None:
             layout.label(text = 'PMX Armature:')
-            if armature.type == 'ARMATURE':
-                layout.operator('pmxarm_tool.fix_an_armature', icon = 'POSE_HLT',
-                                text = 'Fix Armature')
-                layout.operator('pmxarm_tool.fix_my_hips', icon = 'BONE_DATA',
-                                text = 'Fix Hips')
-            else:
-                layout.operator('pmxarm_tool.fix_an_armature', icon = 'ERROR',
-                                text = 'Select Armature')
-                layout.operator('pmxarm_tool.fix_my_hips', icon = 'ERROR',
-                                text = 'Select Armature')
+            layout.operator('pmxarm_tool.fix_an_armature', icon = 'POSE_HLT',
+                            text = 'Fix Armature')
+            layout.operator('pmxarm_tool.fix_my_hips', icon = 'BONE_DATA',
+                            text = 'Fix Hips')
         else:
             layout.label(text = 'Select a MMD model')
 
