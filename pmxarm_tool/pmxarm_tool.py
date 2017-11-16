@@ -3,7 +3,7 @@
 bl_info = {
     'name': 'pmxarm_tool',
     'author': 'shotariya desu',
-    'version': (0, 0, 7),
+    'version': (0, 0, 8),
     'blender': (2, 79, 0),
     'description': 'Fix an armature of MMD models for Unity',
     'location': 'Space Menu',
@@ -19,7 +19,9 @@ def main(self, context):
     bone_list = ['ControlNode', 'ParentNode', 'Center', 'CenterTip', 'Groove', 'Waist', 'LowerBody2', 'Eyes', 'EyesTip',
                  'LowerBodyTip', 'UpperBody2Tip', 'GrooveTip', 'NeckTip']
     bone_list_with = ['_shadow_', '_dummy_', 'Dummy_', 'WaistCancel', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
-                      'ToeTipIKTip', 'ShoulderP_', 'EyeTip_']
+                      'ToeTipIKTip', 'ShoulderP_', 'EyeTip_', 'ThumbTip_', 'IndexFingerTip_', 'MiddleFingerTip_',
+                      'RingFingerTip_', 'LittleFingerTip_', 'HandDummy_', 'ArmTwist', 'HandTwist', 'LegD', 'KneeD_L',
+                      'AnkleD', 'LegTipEX', 'HandTip_']
     bone_list_parenting = {
         'UpperBody': 'LowerBody',
         'Shoulder_L': 'UpperBody2',
@@ -34,10 +36,42 @@ def main(self, context):
         'LegD_R': 'Leg_R',
         'KneeD_L': 'Knee_L',
         'KneeD_R': 'Knee_R',
+        'Knee_L': 'Leg_L',
+        'Knee_R': 'Leg_R',
         'AnkleD_L': 'Ankle_L',
         'AnkleD_R': 'Ankle_R',
+        'Ankle_L': 'Knee_L',
+        'Ankle_R': 'Knee_R',
         'LegTipEX_L': 'ToeTip_L',
-        'LegTipEX_R': 'ToeTip_R'
+        'LegTipEX_R': 'ToeTip_R',
+        'ToeTip_L': 'Ankle_L',
+        'ToeTip_R': 'Ankle_R'
+    }
+    bone_list_weight= {
+        'LegD_L': 'Left leg',
+        'LegD_R': 'Right leg',
+        'KneeD_L': 'Left knee',
+        'KneeD_R': 'Right knee',
+        'AnkleD_L': 'Left ankle',
+        'AnkleD_R': 'Right ankle',
+        'LegTipEX_L': 'Left toe',
+        'LegTipEX_R': 'Right toe',
+        'ArmTwist_L': 'Left arm',
+        'ArmTwist_R': 'Right arm',
+        'ArmTwist1_L': 'Left arm',
+        'ArmTwist1_R': 'Right arm',
+        'ArmTwist2_L': 'Left arm',
+        'ArmTwist2_R': 'Right arm',
+        'ArmTwist3_L': 'Left arm',
+        'ArmTwist3_R': 'Right arm',
+        'HandTwist_L': 'Left elbow',
+        'HandTwist_R': 'Right elbow',
+        'HandTwist1_L': 'Left elbow',
+        'HandTwist1_R': 'Right elbow',
+        'HandTwist2_L': 'Left elbow',
+        'HandTwist2_R': 'Right elbow',
+        'HandTwist3_L': 'Left elbow',
+        'HandTwist3_R': 'Right elbow'
     }
     bone_list_translate = {
         'LowerBody': 'Hips',
@@ -59,7 +93,26 @@ def main(self, context):
         'Elbow_R': 'Right elbow',
         'Wrist_L': 'Left wrist',
         'Wrist_R': 'Right wrist'
-}
+    }
+
+    def delete_hierarchy(obj):
+        names = {obj.name}
+
+        def get_child_names(objz):
+            for child in objz.children:
+                names.add(child.name)
+                if child.children:
+                    get_child_names(child)
+
+        get_child_names(obj)
+        objects = bpy.data.objects
+        [setattr(objects[n], 'select', True) for n in names]
+
+        bpy.ops.object.delete()
+        
+    bpy.ops.object.hide_view_clear()
+    bpy.ops.object.mode_set(mode='OBJECT')
+    bpy.ops.object.select_all(action='DESELECT')
 
     for obj in bpy.data.objects:
         obj.select = False
@@ -68,17 +121,13 @@ def main(self, context):
             obj.select = True
 
     armature = bpy.context.scene.objects.active
-    
+
     if armature is not None:
         if armature.type != 'ARMATURE':
             self.report({'ERROR'}, 'Select Armature')
             return {'CANCELLED'}
 
     bpy.ops.object.mode_set(mode='EDIT')
-
-    for bone in armature.data.edit_bones:
-        if bone.name in bone_list or bone.name.startswith(tuple(bone_list_with)):
-            armature.data.edit_bones.remove(bone)
 
     for key, value in bone_list_parenting.items():
         pb = armature.pose.bones.get(key)
@@ -93,8 +142,41 @@ def main(self, context):
             continue
         pb.name = value
 
+    for bone in armature.data.edit_bones:
+        if bone.name in bone_list or bone.name.startswith(tuple(bone_list_with)):
+            armature.data.edit_bones.remove(bone)
+
     bpy.ops.object.mode_set(mode='OBJECT')
+    bpy.ops.object.select_all(action='DESELECT')
+    
+    for obj in bpy.data.objects:
+        if obj.name == 'rigidbodies' or obj.name == 'joints':
+            delete_hierarchy(obj)
+            bpy.data.objects.remove(obj)
+            
+    for obj in bpy.data.objects:
+        obj.select = False
+        if obj.type == 'MESH':
+            bpy.context.scene.objects.active = obj
+            obj.select = True
+
+    mesh = bpy.context.scene.objects.active
+    
+    for key, value in bone_list_weight.items():
+        pb = mesh.vertex_groups.get(key)
+        pb2 = mesh.vertex_groups.get(value)
+        if pb is None or pb2 is None:
+            continue
+        bpy.ops.object.modifier_add(type='VERTEX_WEIGHT_MIX')
+        bpy.context.object.modifiers['VertexWeightMix'].vertex_group_a = value
+        bpy.context.object.modifiers['VertexWeightMix'].vertex_group_b = key
+        bpy.context.object.modifiers['VertexWeightMix'].mix_mode = 'ADD'
+        bpy.context.object.modifiers['VertexWeightMix'].mix_set = 'B'
+        bpy.ops.object.modifier_apply(modifier='VertexWeightMix')
+        mesh.vertex_groups.remove(pb)
+
     armature.data.pose_position = 'REST'
+    bpy.ops.object.select_all(action='DESELECT')
 
 
 class FixPMXArmature(bpy.types.Operator):
