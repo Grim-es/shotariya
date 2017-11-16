@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 bl_info = {
-    "name": "pmxarm_tool",
-    "author": "shotariya desu",
-    "version": (0, 0, 7),
-    "blender": (2, 79, 0),
-    "description": "Fix an armature of MMD models for Unity",
-    "location": "Space Menu",
-    "warning": "",
-    "wiki_url": "",
-    "category": "Object"
+    'name': 'pmxarm_tool',
+    'author': 'shotariya desu',
+    'version': (0, 0, 7),
+    'blender': (2, 79, 0),
+    'description': 'Fix an armature of MMD models for Unity',
+    'location': 'Space Menu',
+    'warning': '',
+    'wiki_url': '',
+    'category': 'Object'
     }
 
 import bpy
@@ -98,8 +98,8 @@ def main(self, context):
 
 
 class FixPMXArmature(bpy.types.Operator):
-    bl_idname = "pmxarm_tool.fix_an_armature"
-    bl_label = "Fix an armature"
+    bl_idname = 'pmxarm_tool.fix_an_armature'
+    bl_label = 'Fix an armature'
 
     @classmethod
     def poll(cls, context):
@@ -112,8 +112,8 @@ class FixPMXArmature(bpy.types.Operator):
 
 
 class FixPMXHips(bpy.types.Operator):
-    bl_idname = "pmxarm_tool.fix_my_hips"
-    bl_label = "Fix my hips"
+    bl_idname = 'pmxarm_tool.fix_my_hips'
+    bl_label = 'Fix my hips'
 
     def execute(self, context):
         self.report({'INFO'}, 'This feature has not yet been scripted.')
@@ -152,5 +152,5 @@ def unregister():
     bpy.utils.unregister_class(PMXArmToolPpanel)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     register()
