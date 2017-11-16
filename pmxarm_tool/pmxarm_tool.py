@@ -21,7 +21,7 @@ def main(self, context):
     bone_list_with = ['_shadow_', '_dummy_', 'Dummy_', 'WaistCancel', 'LegIKParent', 'LegIK', 'LegIKTip', 'ToeTipIK',
                       'ToeTipIKTip', 'ShoulderP_', 'EyeTip_', 'ThumbTip_', 'IndexFingerTip_', 'MiddleFingerTip_',
                       'RingFingerTip_', 'LittleFingerTip_', 'HandDummy_', 'ArmTwist', 'HandTwist', 'LegD', 'KneeD_L',
-                      'AnkleD', 'LegTipEX', 'HandTip_']
+                      'AnkleD', 'LegTipEX', 'HandTip_', 'ShoulderC_', 'SleeveShoulderIK_']
     bone_list_parenting = {
         'UpperBody': 'LowerBody',
         'Shoulder_L': 'UpperBody2',
@@ -56,6 +56,10 @@ def main(self, context):
         'AnkleD_R': 'Right ankle',
         'LegTipEX_L': 'Left toe',
         'LegTipEX_R': 'Right toe',
+        'Shoulder_L': 'ShoulderC_L',
+        'Shoulder_R': 'ShoulderC_R',
+        'Shoulder_L': 'SleeveShoulderIK_L',
+        'Shoulder_R': 'SleeveShoulderIK_R',
         'ArmTwist_L': 'Left arm',
         'ArmTwist_R': 'Right arm',
         'ArmTwist1_L': 'Left arm',
