@@ -113,7 +113,7 @@ class FixPMXArmature(bpy.types.Operator):
 
 class FixPMXHips(bpy.types.Operator):
     bl_idname = "pmxarm_tool.fix_my_hips"
-    bl_label = "Fix an armature"
+    bl_label = "Fix my hips"
 
     def execute(self, context):
         self.report({'INFO'}, 'This feature has not yet been scripted.')
