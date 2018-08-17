@@ -212,6 +212,7 @@ class PMXArmToolPpanel(bpy.types.Panel):
     bl_region_type = 'TOOLS'
     bl_context = 'objectmode'
     bl_category = 'pmxarm'
+    bl_options = {'REGISTER', 'UNDO', 'INTERNAL'}
 
     def draw(self, context):
         layout = self.layout
