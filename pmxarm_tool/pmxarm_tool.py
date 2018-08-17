@@ -186,6 +186,7 @@ def main(self, context):
 class FixPMXArmature(bpy.types.Operator):
     bl_idname = 'pmxarm_tool.fix_an_armature'
     bl_label = 'Fix an armature'
+    bl_options = {'REGISTER', 'UNDO', 'INTERNAL'}
 
     @classmethod
     def poll(cls, context):
@@ -200,6 +201,7 @@ class FixPMXArmature(bpy.types.Operator):
 class FixPMXHips(bpy.types.Operator):
     bl_idname = 'pmxarm_tool.fix_my_hips'
     bl_label = 'Fix my hips'
+    bl_options = {'REGISTER', 'UNDO', 'INTERNAL'}
 
     def execute(self, context):
         self.report({'INFO'}, 'This feature has not yet been scripted.')
@@ -212,7 +214,6 @@ class PMXArmToolPpanel(bpy.types.Panel):
     bl_region_type = 'TOOLS'
     bl_context = 'objectmode'
     bl_category = 'pmxarm'
-    bl_options = {'REGISTER', 'UNDO', 'INTERNAL'}
 
     def draw(self, context):
         layout = self.layout
